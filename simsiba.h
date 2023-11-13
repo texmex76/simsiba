@@ -4,7 +4,7 @@
 extern "C" {
 #endif
 
-enum option_type { TYPE_FLAG, TYPE_STRING, TYPE_INT };
+enum option_type { TYPE_FLAG, TYPE_STRING, TYPE_INT, TYPE_ULONG };
 
 struct option {
   const char* syntax;

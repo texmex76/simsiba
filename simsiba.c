@@ -26,7 +26,7 @@ void parse_args(int argc, char** argv, struct opt_ctx *ctx) {
                     if (i + 1 < argc) {
                         *(char**)ctx->options[j].variable = argv[++i];
                     } else {
-                        fprintf(stderr, "Option '%s' requires an argument.\n", argv[i]);
+                        fprintf(stderr, "Option '%s' requires a string argument.\n", argv[i]);
                         exit(1);
                     }
                 } else if (ctx->options[j].type == TYPE_INT) {
@@ -35,6 +35,19 @@ void parse_args(int argc, char** argv, struct opt_ctx *ctx) {
                         *(int*)ctx->options[j].variable = atoi(argv[++i]);
                     } else {
                         fprintf(stderr, "Option '%s' requires an integer argument.\n", argv[i]);
+                        exit(1);
+                    }
+                } else if (ctx->options[j].type == TYPE_ULONG) {
+                    // Set unsigned long variable
+                    if (i + 1 < argc) {
+                        char *endPtr;
+                        *(unsigned long*)ctx->options[j].variable = strtoul(argv[++i], &endPtr, 10);
+                        if (*endPtr != '\0') {
+                            fprintf(stderr, "Option '%s' requires a valid unsigned long argument.\n", argv[i-1]);
+                            exit(1);
+                        }
+                    } else {
+                        fprintf(stderr, "Option '%s' requires an unsigned long argument.\n", argv[i]);
                         exit(1);
                     }
                 }
