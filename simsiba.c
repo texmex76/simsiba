@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "parse.h"
+#include "simsiba.h"
 
 // Function to register an option
 void register_option(const char* syntax, const char* help, void* variable, int type, struct opt_ctx *ctx) {
