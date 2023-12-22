@@ -1,9 +1,28 @@
+#include <ctype.h>
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "simsiba.h"
+
+int is_valid_integer(const char *str) {
+  while (*str == ' ')
+    str++;
+
+  if (*str == '+' || *str == '-')
+    str++;
+
+  if (!isdigit((unsigned char)*str))
+    return 0;
+
+  while (*str) {
+    if (!isdigit((unsigned char)*str))
+      return 0;
+    str++;
+  }
+  return 1;
+}
 
 // Function to register an option
 void register_option(const char *syntax, const char *help, void *variable,
@@ -17,9 +36,9 @@ void register_option(const char *syntax, const char *help, void *variable,
 
 // Function to parse command line arguments
 void parse_args(int argc, char **argv, struct opt_ctx *ctx) {
-  for (volatile int i = 1; i < argc; i++) {
+  for (int i = 1; i < argc; i++) {
     int matched = 0;
-    for (volatile int j = 0; j < ctx->option_count; j++) {
+    for (int j = 0; j < ctx->option_count; j++) {
       if (strcmp(argv[i], ctx->options[j].syntax) == 0) {
         matched = 1;
         if (ctx->options[j].type == TYPE_FLAG) {
@@ -36,7 +55,7 @@ void parse_args(int argc, char **argv, struct opt_ctx *ctx) {
           }
         } else if (ctx->options[j].type == TYPE_INT) {
           // Set integer variable
-          if (i + 1 < argc) {
+          if (i + 1 < argc && is_valid_integer(argv[i + 1])) {
             i++;
             *(int *)ctx->options[j].variable = atoi(argv[i]);
           } else {
