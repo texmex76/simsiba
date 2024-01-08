@@ -21,7 +21,7 @@ struct opt_ctx {
 void register_option(const char *syntax, const char *help, void *variable,
                      int type, struct opt_ctx *ctx);
 void parse_args(int argc, char **argv, struct opt_ctx *ctx);
-void display_help(struct opt_ctx *ctx);
+void print_help(struct opt_ctx *ctx);
 struct opt_ctx *new_opt_ctx(void);
 void free_opt_ctx(struct opt_ctx *ctx);
 

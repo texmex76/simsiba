@@ -5,6 +5,9 @@ project(simsiba)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+set(CMAKE_C_COMPILER clang)
+set(CMAKE_CXX_COMPILER clang++)
+
 # For programming
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 

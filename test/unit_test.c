@@ -20,6 +20,12 @@ int main(int argc, char **argv) {
 
   parse_args(argc, argv, opt_ctx);
 
+  if (help_flag) {
+    print_help(opt_ctx);
+    free_opt_ctx(opt_ctx);
+    return 0;
+  }
+
   // Print received inputs for verification
   printf("help_flag=%d;model_path=%s;some_int=%d;some_uint32=%u\n", help_flag,
          model_path ? model_path : "NULL", some_int, some_uint32);
