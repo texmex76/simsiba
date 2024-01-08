@@ -43,3 +43,4 @@ free_opt_ctx(opt_ctx);
 - [ ] Linting
 - [ ] Static analysis
 - [ ] Deployment of all above on GitHub
+- [ ] Add documentation
