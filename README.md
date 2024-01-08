@@ -15,7 +15,7 @@ target_link_libraries(<your_executable> PRIVATE simsiba)
 In `your_executable.<c/cpp>`:
 
 ```c
-struct opt_ctx * opt_ctx = new_opt_ctx(10);
+struct opt_ctx * opt_ctx = new_opt_ctx();
 int help_flag = 0;
 char* model_path = NULL;
 
@@ -33,3 +33,13 @@ return 0;
 
 free_opt_ctx(opt_ctx);
 ```
+
+# TODOs
+
+- [x] Unit testing
+- [ ] Fuzzing
+- [ ] Checking for memory leaks
+- [ ] Formal verification tools
+- [ ] Linting
+- [ ] Static analysis
+- [ ] Deployment of all above on GitHub
