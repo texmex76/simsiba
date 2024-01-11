@@ -8,6 +8,9 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_COMPILER clang)
 set(CMAKE_CXX_COMPILER clang++)
 
+set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -Wextra -Werror")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
+
 # For programming
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -30,7 +33,7 @@ enable_testing()
 # Add a test
 add_test(NAME UnitTest COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/test/unit_test.sh)
 add_test(NAME Fuzzing COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/test/fuzz.sh)
-
+add_test(NAME MemoryLeaks COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/test/memory_leaks.sh)
 
 if (DEBUG)
     set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -O0 -g")

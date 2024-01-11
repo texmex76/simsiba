@@ -37,10 +37,10 @@ free_opt_ctx(opt_ctx);
 # TODOs
 
 - [x] Unit testing
-- [ ] Fuzzing
-- [ ] Checking for memory leaks
+- [x] Fuzzing
+- [x] Checking for memory leaks
 - [ ] Formal verification tools
 - [ ] Linting
 - [ ] Static analysis
-- [ ] Deployment of all above on GitHub
+- [x] Automatic tests on GitHub
 - [ ] Add documentation

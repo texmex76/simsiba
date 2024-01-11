@@ -6,6 +6,15 @@
 
 #include "simsiba.h"
 
+/**
+ * @brief Check if a string represents a valid integer.
+ *
+ * This function checks if the given string is a valid representation
+ * of an integer, potentially prefixed with '+' or '-'.
+ *
+ * @param str The string to check.
+ * @return int 1 if valid, 0 otherwise.
+ */
 int is_valid_integer(const char *str) {
   while (*str == ' ')
     str++;
@@ -24,6 +33,15 @@ int is_valid_integer(const char *str) {
   return 1;
 }
 
+/**
+ * @brief Check if a string represents a valid positive integer.
+ *
+ * This function checks if the given string is a valid representation
+ * of a positive integer, potentially prefixed with '+'.
+ *
+ * @param str The string to check.
+ * @return int 1 if valid, 0 otherwise.
+ */
 int is_valid_integer_pos(const char *str) {
   while (*str == ' ')
     str++;
@@ -42,19 +60,48 @@ int is_valid_integer_pos(const char *str) {
   return 1;
 }
 
+/**
+ * @brief Verify successful conversion of a string to an integer.
+ *
+ * Compares the original string with its conversion back from an integer.
+ *
+ * @param inp The original input string.
+ * @param out The output integer.
+ * @return int 1 if conversion is successful, 0 otherwise.
+ */
+
 int int_conversion_success(const char *inp, int out) {
   char back_to_string[50];
   sprintf(back_to_string, "%d", out);
   return strcmp(inp, back_to_string) == 0;
 }
 
+/**
+ * @brief Verify successful conversion of a string to a uint32_t.
+ *
+ * Compares the original string with its conversion back from a uint32_t.
+ *
+ * @param inp The original input string.
+ * @param out The output uint32_t.
+ * @return int 1 if conversion is successful, 0 otherwise.
+ */
 int uint32_conversion_success(const char *inp, uint32_t out) {
   char back_to_string[50];
   sprintf(back_to_string, "%" PRIu32, out);
   return strcmp(inp, back_to_string) == 0;
 }
 
-// Function to register an option
+/**
+ * @brief Register a command line option.
+ *
+ * Adds a new option to the context, expanding the options array.
+ *
+ * @param syntax The option syntax.
+ * @param help The help text for the option.
+ * @param variable Pointer to the variable that will hold the option value.
+ * @param type The type of the option.
+ * @param ctx Pointer to the option context.
+ */
 void register_option(const char *syntax, const char *help, void *variable,
                      int type, struct opt_ctx *ctx) {
   ctx->option_count++;
@@ -64,7 +111,16 @@ void register_option(const char *syntax, const char *help, void *variable,
       (struct option){syntax, help, variable, type};
 }
 
-// Function to parse command line arguments
+/**
+ * @brief Parse command line arguments.
+ *
+ * Iterates over all arguments and sets the corresponding options in the
+ * context.
+ *
+ * @param argc The argument count.
+ * @param argv The argument vector.
+ * @param ctx The options context.
+ */
 void parse_args(int argc, char **argv, struct opt_ctx *ctx) {
   for (int i = 1; i < argc; i++) {
     int matched = 0;
@@ -128,7 +184,13 @@ void parse_args(int argc, char **argv, struct opt_ctx *ctx) {
   }
 }
 
-// Function to display help
+/**
+ * @brief Display help information.
+ *
+ * Prints the usage and help information for each registered option.
+ *
+ * @param ctx The options context.
+ */
 void print_help(struct opt_ctx *ctx) {
   printf("Usage: [options]\n");
   for (int i = 0; i < ctx->option_count; i++) {
@@ -136,6 +198,13 @@ void print_help(struct opt_ctx *ctx) {
   }
 }
 
+/**
+ * @brief Create a new options context.
+ *
+ * Allocates and initializes a new options context.
+ *
+ * @return struct opt_ctx* Pointer to the newly created options context.
+ */
 struct opt_ctx *new_opt_ctx() {
   struct opt_ctx *ctx = malloc(sizeof(struct opt_ctx));
   ctx->option_count = 0;
@@ -143,6 +212,13 @@ struct opt_ctx *new_opt_ctx() {
   return ctx;
 }
 
+/**
+ * @brief Free an options context.
+ *
+ * Deallocates the options array and the options context itself.
+ *
+ * @param ctx The options context to free.
+ */
 void free_opt_ctx(struct opt_ctx *ctx) {
   free(ctx->options);
   free(ctx);
