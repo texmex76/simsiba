@@ -21,11 +21,15 @@ target_include_directories(simsiba PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(unit_test test/unit_test.c)
 target_link_libraries(unit_test PRIVATE simsiba)
 
+add_executable(fuzz test/fuzz.c)
+target_link_libraries(fuzz PRIVATE simsiba)
+
 # Enable testing with CTest
 enable_testing()
 
 # Add a test
 add_test(NAME UnitTest COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/test/unit_test.sh)
+add_test(NAME Fuzzing COMMAND /bin/bash ${CMAKE_CURRENT_SOURCE_DIR}/test/fuzz.sh)
 
 
 if (DEBUG)
