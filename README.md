@@ -39,8 +39,5 @@ free_opt_ctx(opt_ctx);
 - [x] Unit testing
 - [x] Fuzzing
 - [x] Checking for memory leaks
-- [ ] Formal verification tools
-- [ ] Linting
-- [ ] Static analysis
 - [x] Automatic tests on GitHub
-- [ ] Add documentation
+- [x] Add documentation
